@@ -1,0 +1,11 @@
+---
+galaxy_info:
+  author: Denis Khabarov
+  description: An ansible role for configuring Message Of The Day (motd) file. By default this role add additional information about the distro and the hardware.
+  license: GPLv3
+  min_ansible_version: 1.4
+  platforms:
+  - name: Ubuntu
+  categories:
+  - development
+dependencies: []

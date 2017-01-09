@@ -1,0 +1,33 @@
+---
+
+- name: Add 99-footer file
+  template:
+    src: etc/update-motd.d/99-footer.j2
+    dest: /etc/update-motd.d/99-footer
+    owner: root 
+    group: root
+    mode: 0755
+  when:
+    - __ansible_role_motd_state is defined
+    - __ansible_role_motd_state == 'present'
+
+- name: Add motd tail
+  template:
+    src: etc/motd.tail.j2
+    dest: /etc/motd.tail
+    owner: root
+    group: root
+    mode: 0755
+  when:
+    - __ansible_role_motd_state is defined
+    - __ansible_role_motd_state == 'present'
+
+- name: Delete motd files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/update-motd.d/99-footer
+    - /etc/motd.tail
+  when:
+    - __ansible_role_motd_state == 'absent'
